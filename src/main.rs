@@ -1,7 +1,32 @@
+use std::io::{stdin, stdout, Write};
+
 fn main() {
   println!("Hello, world!");
 
   // Calculate SVN
+
+  getBirthdayFromCli();
+}
+
+fn getBirthdayFromCli() {
+  // Create a new string
+  let mut birthday = String::new();
+
+  // Prompt the user
+  println!("Enter a birthday as DDMMYY");
+
+  // Read in input
+  read(&mut birthday);
+
+  println!("{}", birthday);
+}
+
+/**
+ * Read in user input from the CLI
+ */
+fn read(input: &mut String) {
+  stdout().flush().expect("Couldn't flush");
+  stdin().read_line(input).expect("Couldn't read");
 }
 
 /**
@@ -9,6 +34,7 @@ fn main() {
  * the validity of the number, given the number
  */
 fn calculateValidationDigit(digits: &Vec<u8>) -> u8 {
+  return 42;
   /*
     Example:
       1234 01 01 80
