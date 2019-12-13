@@ -3,13 +3,17 @@ use std::io::{stdin, stdout, Write};
 fn main() {
   // Calculate SVN
 
-  get_birthday_from_cli();
+  let birthday = get_birthday_from_cli();
+  let digits = to_digits(&birthday);
+
+  let res = calculate_validation_digit(&digits);
+  println!("{}", &res);
 }
 
 /**
  * Reads in a birthday from the CLI
  */
-fn get_birthday_from_cli() {
+fn get_birthday_from_cli() -> String {
   // Create a new string
   let mut birthday = String::new();
 
@@ -19,7 +23,9 @@ fn get_birthday_from_cli() {
   // Read in input
   read(&mut birthday);
 
-  println!("{}", birthday);
+  let birthday = birthday.trim();
+
+  return *birthday;
 }
 
 /**
@@ -31,10 +37,27 @@ fn read(input: &mut String) {
 }
 
 /**
+ * Converts a string to an array of digits
+ */
+fn to_digits(input: &str) -> [u32; 10] {
+  let chars = input.chars();
+  let mut digits = [0; 10];
+
+  let mut i = 0;
+  for c in chars {
+    i += 1;
+    println!("{} {}", i, c);
+    digits[i] = c.to_digit(10).unwrap();
+  }
+
+  return digits;
+}
+
+/**
  * Calculates the value of the digit used to check
  * the validity of the number, given the number
  */
-fn calculate_validation_digit(digits: &[u8]) -> u8 {
+fn calculate_validation_digit(digits: &[u32]) -> u32 {
   /*
     Example:
       1234 01 01 80
@@ -57,6 +80,11 @@ fn calculate_validation_digit(digits: &[u8]) -> u8 {
       and the calculation is repeated
 
       X = 7
+
+
+
+  birthday = birthday.trim().parse().expect("Please check your input");
+
   */
 
   /**
@@ -92,12 +120,12 @@ fn calculate_validation_digit(digits: &[u8]) -> u8 {
     + transformed_digits[9])
     % 11;
 
-  // // Avoid x being 10
-  // if x == 10 {
-  //   // TODO increment the incrementing number (the first 3 digits) by one
+  // Avoid x being 10
+  if x == 10 {
+    // TODO increment the incrementing number (the first 3 digits) by one
 
-  //   return calculate_validation_digit(&digits);
-  // }
+    return calculate_validation_digit(&digits);
+  }
 
   return x;
 }
