@@ -1,14 +1,15 @@
 use std::io::{stdin, stdout, Write};
 
 fn main() {
-  println!("Hello, world!");
-
   // Calculate SVN
 
-  getBirthdayFromCli();
+  get_birthday_from_cli();
 }
 
-fn getBirthdayFromCli() {
+/**
+ * Reads in a birthday from the CLI
+ */
+fn get_birthday_from_cli() {
   // Create a new string
   let mut birthday = String::new();
 
@@ -33,7 +34,7 @@ fn read(input: &mut String) {
  * Calculates the value of the digit used to check
  * the validity of the number, given the number
  */
-fn calculateValidationDigit(digits: &[u8]) -> u8 {
+fn calculate_validation_digit(digits: &[u8]) -> u8 {
   /*
     Example:
       1234 01 01 80
@@ -91,11 +92,12 @@ fn calculateValidationDigit(digits: &[u8]) -> u8 {
     + transformed_digits[9])
     % 11;
 
-  // Avoid x being 10
-  if x == 10 {
-    // TODO increment the incrementing number (the first 3 digits) by one
-    return calculateValidationDigit(&digits);
-  }
+  // // Avoid x being 10
+  // if x == 10 {
+  //   // TODO increment the incrementing number (the first 3 digits) by one
+
+  //   return calculate_validation_digit(&digits);
+  // }
 
   return x;
 }
