@@ -25,7 +25,7 @@ fn get_birthday_from_cli() -> String {
 
   let birthday = birthday.trim();
 
-  return *birthday;
+  return birthday;
 }
 
 /**
