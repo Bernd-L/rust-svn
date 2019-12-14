@@ -3,11 +3,27 @@ use std::io::{stdin, stdout, Write};
 fn main() {
   // Calculate SVN
 
-  let birthday = get_birthday_from_cli();
-  let digits = to_digits(&birthday);
+  let svn = get_svn_from_cli();
+  let digits = to_digits(&svn);
 
   let res = calculate_validation_digit(&digits, false);
   println!("{}", &res);
+}
+
+/**
+ * Reads in a SVN from the CLI
+ */
+fn get_svn_from_cli() -> String {
+  // Create a new string
+  let mut svn = String::new();
+
+  // Prompt the user
+  println!("Enter a SVN as IIICDDMMYY");
+
+  // Read in input
+  read(&mut svn);
+
+  return String::from(svn.trim());
 }
 
 /**
@@ -23,9 +39,7 @@ fn get_birthday_from_cli() -> String {
   // Read in input
   read(&mut birthday);
 
-  let birthday = birthday.trim();
-
-  return String::from(birthday);
+  return String::from(birthday.trim());
 }
 
 /**
@@ -45,9 +59,9 @@ fn to_digits(input: &str) -> [u32; 10] {
 
   let mut i = 0;
   for c in chars {
-    i += 1;
     println!("{} {}", i, c);
     digits[i] = c.to_digit(10).unwrap();
+    i += 1;
   }
 
   return digits;
@@ -117,11 +131,27 @@ fn calculate_validation_digit(digits: &[u32], re_run: bool) -> u32 {
     % 11;
 
   // Avoid x being 10
-  while x == 10 {
-    // TODO increment the incrementing number (the first 3 digits) by one
-
-    return calculate_validation_digit(&digits, true);
+  if x == 10 {
+    return 0;
   }
+
+  // FIXME The logic below needs to replace the if above
+  /*   while x == 10 {
+    // Increment the incrementing number (the first 3 digits) by one
+    let mut temp: u32 = (format!("{}{}{}", digits[0], digits[1], digits[2]))
+      .parse()
+      .expect("Invalid format");
+
+    temp += 1;
+
+    digits[2] = temp % 10;
+    digits[1] = temp % 100;
+
+    // Re-run the calculation with the increased number
+    return calculate_validation_digit(&digits, true);
+  } */
 
   return x;
 }
+
+// String temp = Integer.parseInt(digits[0] + digits[1] + digits[2]) + 1 + "";
