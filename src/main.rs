@@ -3,17 +3,17 @@ use std::io::{stdin, stdout, Write};
 fn main() {
   // Calculate SVN
 
-  let birthday = get_birthday_from_cli();
+  let birthday: &str = get_birthday_from_cli();
   let digits = to_digits(&birthday);
 
-  let res = calculate_validation_digit(&digits);
+  let res = calculate_validation_digit(&digits, false);
   println!("{}", &res);
 }
 
 /**
  * Reads in a birthday from the CLI
  */
-fn get_birthday_from_cli() -> String {
+fn get_birthday_from_cli() -> &'static str {
   // Create a new string
   let mut birthday = String::new();
 
@@ -57,7 +57,7 @@ fn to_digits(input: &str) -> [u32; 10] {
  * Calculates the value of the digit used to check
  * the validity of the number, given the number
  */
-fn calculate_validation_digit(digits: &[u32]) -> u32 {
+fn calculate_validation_digit(digits: &[u32], re_run: bool) -> u32 {
   /*
     Example:
       1234 01 01 80
@@ -121,7 +121,7 @@ fn calculate_validation_digit(digits: &[u32]) -> u32 {
     % 11;
 
   // Avoid x being 10
-  if x == 10 {
+  while x == 10 {
     // TODO increment the incrementing number (the first 3 digits) by one
 
     return calculate_validation_digit(&digits);
