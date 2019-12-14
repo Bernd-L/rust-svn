@@ -3,7 +3,7 @@ use std::io::{stdin, stdout, Write};
 fn main() {
   // Calculate SVN
 
-  let birthday: &str = get_birthday_from_cli();
+  let birthday = get_birthday_from_cli();
   let digits = to_digits(&birthday);
 
   let res = calculate_validation_digit(&digits, false);
@@ -13,7 +13,7 @@ fn main() {
 /**
  * Reads in a birthday from the CLI
  */
-fn get_birthday_from_cli() -> &'static str {
+fn get_birthday_from_cli() -> String {
   // Create a new string
   let mut birthday = String::new();
 
@@ -25,7 +25,7 @@ fn get_birthday_from_cli() -> &'static str {
 
   let birthday = birthday.trim();
 
-  return birthday;
+  return String::from(birthday);
 }
 
 /**
@@ -87,9 +87,7 @@ fn calculate_validation_digit(digits: &[u32], re_run: bool) -> u32 {
 
   */
 
-  /**
-   * The array after multiplication
-   */
+  //  The array after multiplication
   let mut transformed_digits = [0; 10];
 
   // Transform the incrementing digits
@@ -106,9 +104,7 @@ fn calculate_validation_digit(digits: &[u32], re_run: bool) -> u32 {
   transformed_digits[8] = digits[8] * 1;
   transformed_digits[9] = digits[9] * 6;
 
-  /**
-   * The sum mod 11
-   */
+  // The sum mod 11
   let x = (transformed_digits[0]
     + transformed_digits[1]
     + transformed_digits[2]
@@ -124,7 +120,7 @@ fn calculate_validation_digit(digits: &[u32], re_run: bool) -> u32 {
   while x == 10 {
     // TODO increment the incrementing number (the first 3 digits) by one
 
-    return calculate_validation_digit(&digits);
+    return calculate_validation_digit(&digits, true);
   }
 
   return x;
