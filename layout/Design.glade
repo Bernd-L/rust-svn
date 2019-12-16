@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
+<!-- Generated with glade 3.22.1 
+
+Copyright (C) Bernd-L 2019
+
+This file is part of rust-svn.
+
+rust-svn is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+rust-svn is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with rust-svn.  If not, see <http://www.gnu.org/licenses/>.
+
+Author: Bernd-L
+
+-->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <!-- interface-license-type gplv3 -->
+  <!-- interface-name rust-svn -->
+  <!-- interface-description A program written in Rust to check and generate SVNs -->
+  <!-- interface-copyright Bernd-L 2019 -->
+  <!-- interface-authors Bernd-L -->
   <object class="GtkWindow">
     <property name="name">Window</property>
     <property name="can_focus">False</property>
@@ -34,6 +60,7 @@
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">SVN invalid</property>
           </object>
           <packing>
@@ -80,6 +107,7 @@
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">Date as DDMMYY</property>
           </object>
           <packing>
