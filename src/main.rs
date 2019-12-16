@@ -1,6 +1,8 @@
 use std::io::{stdin, stdout, Write};
+mod gui;
 
 fn main() {
+  gui::main();
   // Calculate SVN
 
   let svn = get_svn_from_cli();
