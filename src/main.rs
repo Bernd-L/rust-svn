@@ -3,6 +3,6 @@ mod gui;
 mod logic;
 
 fn main() {
-  cli::main();
+  // cli::main();
   gui::main();
 }

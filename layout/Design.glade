@@ -28,7 +28,7 @@ Author: Bernd-L
   <!-- interface-description A program written in Rust to check and generate SVNs -->
   <!-- interface-copyright Bernd-L 2019 -->
   <!-- interface-authors Bernd-L -->
-  <object class="GtkWindow">
+  <object class="GtkWindow" id="window1">
     <property name="name">Window</property>
     <property name="can_focus">False</property>
     <property name="hexpand">True</property>
