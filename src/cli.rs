@@ -1,13 +1,13 @@
-use crate::logic::*;
+use crate::logic::{calculate_validation_digit, to_digits};
 use std::io::{stdin, stdout, Write};
 
 pub fn main() {
   // Calculate SVN
 
   let svn = get_svn_from_cli();
-  let digits = logic::to_digits(&svn);
+  let digits = to_digits(&svn);
 
-  let res = logic::calculate_validation_digit(&digits, false);
+  let res = calculate_validation_digit(&digits, false);
   println!("{}", &res);
 }
 

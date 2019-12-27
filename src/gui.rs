@@ -35,7 +35,7 @@ pub fn main() {
     println!("Failed to initialize GTK.");
     return;
   }
-  let glade_src = include_str!("../layout/Design.glade");
+  let glade_src = include_str!("layout/Design.glade");
   let builder = gtk::Builder::new_from_string(glade_src);
 
   let window: gtk::Window = builder.get_object("window1").unwrap();
