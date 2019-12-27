@@ -1,105 +1,107 @@
-/**
- * Converts a string to an array of digits
- */
-pub fn to_digits(input: &str) -> [u32; 10] {
-  let chars = input.chars();
-  let mut digits = [0; 10];
+pub mod logic {
+  /**
+   * Converts a string to an array of digits
+   */
+  pub fn to_digits(input: &str) -> [u32; 10] {
+    let chars = input.chars();
+    let mut digits = [0; 10];
 
-  let mut i = 0;
-  for c in chars {
-    println!("{} {}", i, c);
-    digits[i] = c.to_digit(10).unwrap();
-    i += 1;
+    let mut i = 0;
+    for c in chars {
+      println!("{} {}", i, c);
+      digits[i] = c.to_digit(10).unwrap();
+      i += 1;
+    }
+
+    return digits;
   }
 
-  return digits;
-}
+  /**
+   * Calculates the value of the digit used to check
+   * the validity of the number, given the number
+   */
+  pub fn calculate_validation_digit(digits: &[u32], re_run: bool) -> u32 {
+    /*
+      Example:
+        1234 01 01 80
 
-/**
- * Calculates the value of the digit used to check
- * the validity of the number, given the number
- */
-pub fn calculate_validation_digit(digits: &[u32], re_run: bool) -> u32 {
-  /*
-    Example:
-      1234 01 01 80
+      First 3 digits:
+        incrementing number starting from 100
+        multiply by 3, 7, 9
 
-    First 3 digits:
-      incrementing number starting from 100
-      multiply by 3, 7, 9
+      4th digit:
+        validation digit
 
-    4th digit:
-      validation digit
+      last 6 digits:
+        the birthday in DD MM YY
+        multiply by 5, 8, 4, 2, 1, 6
 
-    last 6 digits:
-      the birthday in DD MM YY
-      multiply by 5, 8, 4, 2, 1, 6
+      The formula:
+        X = (1×3 + 2×7 + 3×9 + 0×5 + 1×8 + 0×4 + 1×2 + 8×1 + 0×6) % 11
 
-    The formula:
-      X = (1×3 + 2×7 + 3×9 + 0×5 + 1×8 + 0×4 + 1×2 + 8×1 + 0×6) % 11
+        If X is 10, the incrementing digits are incremented by 1,
+        and the calculation is repeated
 
-      If X is 10, the incrementing digits are incremented by 1,
-      and the calculation is repeated
-
-      X = 7
+        X = 7
 
 
 
-  birthday = birthday.trim().parse().expect("Please check your input");
+    birthday = birthday.trim().parse().expect("Please check your input");
 
-  */
+    */
 
-  //  The array after multiplication
-  let mut transformed_digits = [0; 10];
+    //  The array after multiplication
+    let mut transformed_digits = [0; 10];
 
-  // Transform the incrementing digits
-  transformed_digits[0] = digits[0] * 3;
-  transformed_digits[1] = digits[1] * 7;
-  transformed_digits[2] = digits[2] * 9;
+    // Transform the incrementing digits
+    transformed_digits[0] = digits[0] * 3;
+    transformed_digits[1] = digits[1] * 7;
+    transformed_digits[2] = digits[2] * 9;
 
-  // Transform the birthday digits
-  // TODO cache these calculations
-  transformed_digits[4] = digits[4] * 5;
-  transformed_digits[5] = digits[5] * 8;
-  transformed_digits[6] = digits[6] * 4;
-  transformed_digits[7] = digits[7] * 2;
-  transformed_digits[8] = digits[8] * 1;
-  transformed_digits[9] = digits[9] * 6;
+    // Transform the birthday digits
+    // TODO cache these calculations
+    transformed_digits[4] = digits[4] * 5;
+    transformed_digits[5] = digits[5] * 8;
+    transformed_digits[6] = digits[6] * 4;
+    transformed_digits[7] = digits[7] * 2;
+    transformed_digits[8] = digits[8] * 1;
+    transformed_digits[9] = digits[9] * 6;
 
-  // The sum mod 11
-  let x = (transformed_digits[0]
-    + transformed_digits[1]
-    + transformed_digits[2]
-    + transformed_digits[4]
-    + transformed_digits[5]
-    + transformed_digits[6]
-    + transformed_digits[7]
-    + transformed_digits[8]
-    + transformed_digits[9])
-    % 11;
+    // The sum mod 11
+    let x = (transformed_digits[0]
+      + transformed_digits[1]
+      + transformed_digits[2]
+      + transformed_digits[4]
+      + transformed_digits[5]
+      + transformed_digits[6]
+      + transformed_digits[7]
+      + transformed_digits[8]
+      + transformed_digits[9])
+      % 11;
 
-  // Avoid x being 10
-  if x == 10 {
-    return 0;
+    // Avoid x being 10
+    if x == 10 {
+      return 0;
+    }
+
+    // FIXME The logic below needs to replace the if above
+    /*   while x == 10 {
+      // Increment the incrementing number (the first 3 digits) by one
+      let mut temp: u32 = (format!("{}{}{}", digits[0], digits[1], digits[2]))
+        .parse()
+        .expect("Invalid format");
+
+      temp += 1;
+
+      digits[2] = temp % 10;
+      digits[1] = temp % 100;
+
+      // Re-run the calculation with the increased number
+      return calculate_validation_digit(&digits, true);
+    } */
+
+    return x;
   }
 
-  // FIXME The logic below needs to replace the if above
-  /*   while x == 10 {
-    // Increment the incrementing number (the first 3 digits) by one
-    let mut temp: u32 = (format!("{}{}{}", digits[0], digits[1], digits[2]))
-      .parse()
-      .expect("Invalid format");
-
-    temp += 1;
-
-    digits[2] = temp % 10;
-    digits[1] = temp % 100;
-
-    // Re-run the calculation with the increased number
-    return calculate_validation_digit(&digits, true);
-  } */
-
-  return x;
+  // String temp = Integer.parseInt(digits[0] + digits[1] + digits[2]) + 1 + "";
 }
-
-// String temp = Integer.parseInt(digits[0] + digits[1] + digits[2]) + 1 + "";

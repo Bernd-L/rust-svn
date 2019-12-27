@@ -1,11 +1,11 @@
+use crate::logic::*;
 use std::io::{stdin, stdout, Write};
-mod logic;
 
 pub fn main() {
   // Calculate SVN
 
   let svn = get_svn_from_cli();
-  let digits = to_digits(&svn);
+  let digits = logic::to_digits(&svn);
 
   let res = logic::calculate_validation_digit(&digits, false);
   println!("{}", &res);
