@@ -46,7 +46,7 @@ Author: Bernd-L
         <property name="row_spacing">2</property>
         <property name="column_spacing">2</property>
         <child>
-          <object class="GtkEntry">
+          <object class="GtkEntry" id="tfSVN">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="hexpand">True</property>
@@ -69,7 +69,7 @@ Author: Bernd-L
           </packing>
         </child>
         <child>
-          <object class="GtkButton">
+          <object class="GtkButton" id="btFix">
             <property name="label" translatable="yes">Fix SVN</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -81,7 +81,7 @@ Author: Bernd-L
           </packing>
         </child>
         <child>
-          <object class="GtkButton">
+          <object class="GtkButton" id="btGenerate">
             <property name="label" translatable="yes">Generate SVNs</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -93,7 +93,7 @@ Author: Bernd-L
           </packing>
         </child>
         <child>
-          <object class="GtkEntry">
+          <object class="GtkEntry" id="tfDate">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="hexpand">True</property>
@@ -125,7 +125,7 @@ Author: Bernd-L
             <property name="propagate_natural_width">True</property>
             <property name="propagate_natural_height">True</property>
             <child>
-              <object class="GtkTextView">
+              <object class="GtkTextView" id="tvSVNs">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
