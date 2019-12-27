@@ -19,6 +19,4 @@ pub fn main() {
   );
 
   popup.run();
-  popup.run();
-  popup.run();
 }
