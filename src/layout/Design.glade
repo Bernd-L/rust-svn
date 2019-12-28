@@ -33,7 +33,8 @@ Author: Bernd-L
     <property name="can_focus">False</property>
     <property name="hexpand">True</property>
     <property name="vexpand">True</property>
-    <child>
+    <property name="title" translatable="yes">Rust SVN utility</property>
+    <child type="titlebar">
       <placeholder/>
     </child>
     <child>
